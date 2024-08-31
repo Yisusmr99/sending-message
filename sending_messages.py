@@ -8,7 +8,7 @@ def producer(queue):
     
     queue: Es una estructura especial (como una fila) para enviar y recibir mensajes.
     """
-    for i in range(5):  # Vamos a crear 5 mensajes
+    for i in range(8):  # Vamos a crear 5 mensajes
         message = f"Mensaje {i}"  # Creamos un mensaje de texto
         print(f"Produciendo: {message}")  # Mostramos en pantalla el mensaje creado
         queue.put(message)  # Enviamos el mensaje a la cola
