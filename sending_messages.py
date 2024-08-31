@@ -32,24 +32,17 @@ def consumer(queue):
 if __name__ == "__main__":
     # Creamos una cola que permitirá a los procesos enviar y recibir mensajes
     message_queue = Queue()
-
     # Creamos el proceso productor que generará mensajes
     producer_process = Process(target=producer, args=(message_queue,))
-    
     # Creamos el proceso consumidor que recibirá los mensajes
     consumer_process = Process(target=consumer, args=(message_queue,))
-
     # Iniciamos ambos procesos
     producer_process.start()  # Inicia el proceso productor
     consumer_process.start()  # Inicia el proceso consumidor
-
     # Esperamos a que el proceso productor termine de enviar todos sus mensajes
     producer_process.join()
-
     # Enviamos un mensaje especial de "FIN" para que el proceso consumidor sepa que debe terminar
     message_queue.put("FIN")
-
     # Esperamos a que el proceso consumidor termine de recibir y procesar todos los mensajes
     consumer_process.join()
-
     print("Todos los procesos han terminado.")  # Mensaje final indicando que todos los procesos han terminado
